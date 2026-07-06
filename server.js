@@ -380,6 +380,35 @@ app.get('/test', (req, res) => {
     });
 });
 
+// Diagnostic endpoint to test live Boomi API connectivity and auth headers
+app.get('/test-boomi', async (req, res) => {
+    try {
+        console.log(`🔍 Diagnostic ping to Boomi chatbot: ${BOOMI_ENDPOINT}`);
+        const response = await axios.post(BOOMI_ENDPOINT, {
+            message: 'User: Ping. Reply with test confirmation.'
+        }, {
+            headers: HEADERS,
+            timeout: 15000 // 15s timeout
+        });
+        
+        res.json({
+            status: 'success',
+            boomi_status: response.status,
+            boomi_data: response.data
+        });
+    } catch (error) {
+        console.error('❌ Boomi diagnostic ping failed:', error.message);
+        res.status(500).json({
+            status: 'failed',
+            error: error.message,
+            code: error.code,
+            response_status: error.response?.status,
+            response_data: error.response?.data
+        });
+    }
+});
+
+
 // Self-ping function for keep alive
 async function selfPing() {
     if (!APP_URL) return;
