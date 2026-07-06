@@ -173,6 +173,9 @@
       console.error('Boomi connection failed:', error);
       typingIndicator.remove();
       appendMessage("Sorry, I'm having trouble connecting to my Boomi Assistant. Please try again shortly.", 'agent');
+      // Clear session ID on failure so the next attempt starts fresh
+      sessionId = "";
+      localStorage.removeItem('boomi_session_id');
     }
   }
 
