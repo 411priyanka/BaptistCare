@@ -434,21 +434,22 @@ a:hover {
   align-items: center;
   gap: 8px;
   padding: 0.8rem 1.4rem;
-  background: #46b1e6; /* Sky Blue highlight */
+  background: var(--color-orange); /* Orange theme */
   color: #ffffff;
   font-family: var(--font-primary);
   font-weight: 600;
   font-size: 0.95rem;
   border-radius: 30px;
-  box-shadow: 0 8px 24px rgba(70, 177, 230, 0.4);
+  box-shadow: 0 8px 24px rgba(205, 88, 4, 0.3);
   cursor: pointer;
   z-index: 1000;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 #did-bubble:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 30px rgba(70, 177, 230, 0.6);
+  background: var(--color-orange-hover);
+  box-shadow: 0 12px 30px rgba(205, 88, 4, 0.5);
 }
 
 #did-bubble svg {
@@ -521,9 +522,9 @@ a:hover {
   right: 2rem;
   width: 64px;
   height: 64px;
-  background: #46b1e6; /* Matching sky blue */
+  background: var(--color-orange); /* Matching orange */
   border-radius: 50%;
-  box-shadow: 0 8px 24px rgba(70, 177, 230, 0.4);
+  box-shadow: 0 8px 24px rgba(205, 88, 4, 0.3);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -534,11 +535,12 @@ a:hover {
 
 #boomi-bubble:hover {
   transform: scale(1.08);
-  box-shadow: 0 12px 30px rgba(70, 177, 230, 0.6);
+  background: var(--color-orange-hover);
+  box-shadow: 0 12px 30px rgba(205, 88, 4, 0.5);
 }
 
 #boomi-bubble.active-close {
-  background: #3a97c9; /* Slightly darker active state */
+  background: var(--color-orange-hover); /* Darker orange when open */
 }
 
 #boomi-window {
