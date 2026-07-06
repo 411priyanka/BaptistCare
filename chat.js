@@ -47,7 +47,7 @@
       <div id="boomi-header">
         <div class="agent-info">
           <span class="status-indicator online"></span>
-          <span>Boomi Chat</span>
+          <span>BaptistCare Agent</span>
         </div>
         <div class="header-actions">
           <button id="reset-boomi" aria-label="Restart Conversation" title="Start new conversation">
