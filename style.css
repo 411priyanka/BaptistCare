@@ -421,38 +421,44 @@ a:hover {
   transform: translateY(-2px);
 }
 
-/* Chat Bubble & Floating Window (Positioned bottom-right) */
-#chat-bubble {
+/* ==========================================================================
+   Dual Agent Chat System: D-ID Video Agent (Left) & Boomi Text Agent (Right)
+   ========================================================================== */
+
+/* --- LEFT SIDE: D-ID Video Agent --- */
+#did-bubble {
   position: fixed;
   bottom: 2rem;
-  right: 2rem;
-  width: 64px;
-  height: 64px;
-  background: var(--color-orange);
-  border-radius: 50%;
-  box-shadow: 0 8px 24px rgba(205, 88, 4, 0.4);
-  cursor: pointer;
+  left: 2rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 8px;
+  padding: 0.8rem 1.4rem;
+  background: #46b1e6; /* Sky Blue highlight */
+  color: #ffffff;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 30px;
+  box-shadow: 0 8px 24px rgba(70, 177, 230, 0.4);
+  cursor: pointer;
   z-index: 1000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#chat-bubble:hover {
-  transform: scale(1.08);
-  box-shadow: 0 12px 30px rgba(205, 88, 4, 0.6);
+#did-bubble:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(70, 177, 230, 0.6);
 }
 
-#chat-bubble svg {
-  width: 28px;
-  height: 28px;
+#did-bubble svg {
+  flex-shrink: 0;
 }
 
-#chat-window {
+#did-window {
   position: fixed;
   bottom: 95px;
-  right: 2rem;
+  left: 2rem;
   width: 400px;
   height: 620px;
   max-height: 85vh;
@@ -468,7 +474,7 @@ a:hover {
   font-size: 0.95rem;
 }
 
-#chat-header {
+#did-header {
   background: var(--color-maroon);
   color: #ffffff;
   padding: 1.2rem;
@@ -479,32 +485,20 @@ a:hover {
   font-family: var(--font-headers);
 }
 
-.agent-info {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
+#did-iframe-container {
+  width: 100%;
+  height: calc(100% - 56px);
+  background: #ffffff;
+  overflow: hidden;
 }
 
-.status-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
+#did-iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
-.status-indicator.online {
-  background-color: #2ecc71;
-  box-shadow: 0 0 8px #2ecc71;
-  animation: pulse-green 2s infinite;
-}
-
-@keyframes pulse-green {
-  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
-  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(46, 204, 113, 0); }
-  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-}
-
-#close-chat {
+#close-did {
   background: transparent;
   border: none;
   color: #ffffff;
@@ -512,13 +506,87 @@ a:hover {
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.2s;
+  line-height: 1;
 }
 
-#close-chat:hover {
+#close-did:hover {
   opacity: 1;
 }
 
-#chat-messages {
+
+/* --- RIGHT SIDE: Boomi Text Agent --- */
+#boomi-bubble {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 64px;
+  height: 64px;
+  background: #46b1e6; /* Matching sky blue */
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(70, 177, 230, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  z-index: 1000;
+}
+
+#boomi-bubble:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(70, 177, 230, 0.6);
+}
+
+#boomi-bubble.active-close {
+  background: #3a97c9; /* Slightly darker active state */
+}
+
+#boomi-window {
+  position: fixed;
+  bottom: 95px;
+  right: 2rem;
+  width: 380px;
+  height: 520px;
+  max-height: 80vh;
+  background: #ffffff;
+  color: #1a1a24;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  font-size: 0.95rem;
+}
+
+#boomi-header {
+  background: var(--color-maroon);
+  color: #ffffff;
+  padding: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-headers);
+}
+
+#close-boomi {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  line-height: 1;
+}
+
+#close-boomi:hover {
+  opacity: 1;
+}
+
+#boomi-messages {
   flex: 1;
   padding: 1.2rem;
   overflow-y: auto;
@@ -528,14 +596,14 @@ a:hover {
   gap: 1rem;
 }
 
-/* Scrollbar */
-#chat-messages::-webkit-scrollbar {
+/* Scrollbar for Boomi message pane */
+#boomi-messages::-webkit-scrollbar {
   width: 6px;
 }
-#chat-messages::-webkit-scrollbar-track {
+#boomi-messages::-webkit-scrollbar-track {
   background: transparent;
 }
-#chat-messages::-webkit-scrollbar-thumb {
+#boomi-messages::-webkit-scrollbar-thumb {
   background: #dddddd;
   border-radius: 4px;
 }
@@ -611,8 +679,7 @@ a:hover {
   }
 }
 
-
-#chat-input-area {
+#boomi-input-area {
   display: flex;
   align-items: center;
   padding: 0.8rem 1rem;
@@ -621,7 +688,7 @@ a:hover {
   gap: 0.5rem;
 }
 
-#chat-input-text {
+#boomi-input-text {
   flex: 1;
   border: 1px solid #e2e8f0;
   border-radius: 20px;
@@ -634,11 +701,11 @@ a:hover {
   color: var(--color-text-dark);
 }
 
-#chat-input-text:focus {
+#boomi-input-text:focus {
   border-color: var(--color-orange);
 }
 
-#chat-send-btn {
+#boomi-send-btn {
   background: var(--color-orange);
   border: none;
   color: #ffffff;
@@ -653,7 +720,7 @@ a:hover {
   flex-shrink: 0;
 }
 
-#chat-send-btn:hover {
+#boomi-send-btn:hover {
   transform: scale(1.05);
   background: var(--color-orange-hover);
 }
@@ -782,57 +849,6 @@ a:hover {
   color: rgba(207, 221, 255, 0.7);
 }
 
-/* D-ID Spokesperson Window (Bottom-Left) */
-#did-spokesperson-window {
-  position: fixed;
-  bottom: 2rem;
-  left: 2rem;
-  width: 360px;
-  height: 520px;
-  max-height: 80vh;
-  background: #ffffff;
-  color: #1a1a24;
-  border-radius: 16px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  display: none; /* Javascript opens it */
-  flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  z-index: 999;
-}
-
-#did-spokesperson-header {
-  background: var(--color-maroon);
-  color: #ffffff;
-  padding: 1.2rem;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-headers);
-}
-
-#close-spokesperson {
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.2s;
-  line-height: 1;
-}
-
-#close-spokesperson:hover {
-  opacity: 1;
-}
-
-#did-agent-container {
-  width: 100%;
-  height: calc(100% - 56px);
-  background: #ffffff;
-}
-
 /* Responsive */
 @media (max-width: 900px) {
   .hero-container {
@@ -854,15 +870,16 @@ a:hover {
     align-items: center;
     text-align: center;
   }
-  #chat-window {
+  #boomi-window {
     right: 1rem;
     left: 1rem;
     width: auto;
     bottom: 80px;
     height: 60vh;
   }
-  #did-spokesperson-window {
-    display: none !important; /* Hide spokesperson on tablet/mobile to save screen real estate */
+  #did-window, #did-bubble {
+    display: none !important; /* Hide Video AI Agent on mobile/tablet to avoid screen crowding */
   }
 }
+
 
