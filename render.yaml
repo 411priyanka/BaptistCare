@@ -4,7 +4,7 @@ services:
     name: baptistcare-boomi-chat-static
     runtime: static
     buildCommand: ""
-    publishPath: "."
+    publishDir: "."
 
   # Alternative: Web Service Deployment (If backend features are added later)
   - type: web
