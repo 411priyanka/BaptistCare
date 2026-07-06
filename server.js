@@ -10,8 +10,8 @@ const schedule = require('node-schedule');
 const app = express();
 
 // Configuration constants
-const BOOMI_USERNAME = "dbiz-MV90UC.YYSLSY";
-const BOOMI_PASSWORD = "e15a5193-1b21-4d6a-a747-61a1e67b40a1";
+const BOOMI_USERNAME = "dbiz-MV90UC.0YFZAO";
+const BOOMI_PASSWORD = "6710d7c5-1f74-49c3-a026-9bb4fc88d2e6";
 const BOOMI_ENDPOINT = "https://c01-aus.integrate-test.boomi.com/ws/rest/southerncross/chatbot";
 const BOOMI_SESSION_ENDPOINT = "https://c01-aus.integrate-test.boomi.com/ws/rest/southerncross/session";
 const SESSION_GET_TIMEOUT = 60000; // 60 seconds

@@ -49,7 +49,15 @@
           <span class="status-indicator online"></span>
           <span>Boomi Chat</span>
         </div>
-        <button id="close-boomi" aria-label="Close Chat">&times;</button>
+        <div class="header-actions">
+          <button id="reset-boomi" aria-label="Restart Conversation" title="Start new conversation">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 .49-4.5"></path>
+            </svg>
+          </button>
+          <button id="close-boomi" aria-label="Close Chat">&times;</button>
+        </div>
       </div>
       <div id="boomi-messages">
         <div class="message agent">
@@ -80,6 +88,7 @@
   const boomiBubbleClose = document.getElementById('boomi-bubble-close');
   const boomiWindow = document.getElementById('boomi-window');
   const closeBoomi = document.getElementById('close-boomi');
+  const resetBoomi = document.getElementById('reset-boomi');
 
   const boomiInput = document.getElementById('boomi-input-text');
   const boomiSendBtn = document.getElementById('boomi-send-btn');
@@ -113,6 +122,26 @@
   closeBoomi.addEventListener('click', () => {
     boomiWindow.style.display = 'none';
     setBoomiBubbleActive(false);
+  });
+
+  resetBoomi.addEventListener('click', () => {
+    // Clear session details
+    sessionId = "";
+    localStorage.removeItem('boomi_session_id');
+    
+    // Clear messages and print initial greeting
+    boomiMessages.innerHTML = `
+      <div class="message agent">
+        <div class="msg-bubble">
+          Hello! I'm your BaptistCare assistant powered by Boomi. How can I help you today?
+        </div>
+      </div>
+    `;
+    
+    // Focus input
+    boomiInput.value = "";
+    boomiInput.style.height = 'auto';
+    boomiInput.focus();
   });
 
   function setBoomiBubbleActive(active) {
