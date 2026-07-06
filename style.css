@@ -421,11 +421,11 @@ a:hover {
   transform: translateY(-2px);
 }
 
-/* Chat Bubble & Floating Window (Moved to bottom-left to prevent D-ID overlap) */
+/* Chat Bubble & Floating Window (Positioned bottom-right) */
 #chat-bubble {
   position: fixed;
   bottom: 2rem;
-  left: 2rem;
+  right: 2rem;
   width: 64px;
   height: 64px;
   background: var(--color-orange);
@@ -452,10 +452,10 @@ a:hover {
 #chat-window {
   position: fixed;
   bottom: 95px;
-  left: 2rem;
-  width: 380px;
-  height: 520px;
-  max-height: 80vh;
+  right: 2rem;
+  width: 400px;
+  height: 620px;
+  max-height: 85vh;
   background: #ffffff;
   color: #1a1a24;
   border-radius: 16px;
