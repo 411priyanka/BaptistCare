@@ -12,8 +12,8 @@ const app = express();
 // Configuration constants
 const BOOMI_USERNAME = "dbiz-MV90UC.0YFZAO";
 const BOOMI_PASSWORD = "6710d7c5-1f74-49c3-a026-9bb4fc88d2e6";
-const BOOMI_ENDPOINT = "https://c01-aus.integrate-test.boomi.com/ws/rest/southerncross/chatbot";
-const BOOMI_SESSION_ENDPOINT = "https://c01-aus.integrate-test.boomi.com/ws/rest/southerncross/session";
+const BOOMI_ENDPOINT = "https://c01-aus.integrate-test.boomi.com/ws/rest/baptistcare/chatbot";
+const BOOMI_SESSION_ENDPOINT = "https://c01-aus.integrate-test.boomi.com/ws/rest/baptistcare/session";
 const SESSION_GET_TIMEOUT = 60000; // 60 seconds
 const AGENT_TIMEOUT = 120000; // 120 seconds
 const SESSION_SAVE_TIMEOUT = 60000; // 60 seconds

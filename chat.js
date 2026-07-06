@@ -124,21 +124,51 @@
     setBoomiBubbleActive(false);
   });
 
-  resetBoomi.addEventListener('click', () => {
+  resetBoomi.addEventListener('click', async () => {
     // Clear session details
     sessionId = "";
     localStorage.removeItem('boomi_session_id');
     
-    // Clear messages and print initial greeting
-    boomiMessages.innerHTML = `
-      <div class="message agent">
-        <div class="msg-bubble">
-          Hello! I'm your BaptistCare assistant powered by Boomi. How can I help you today?
-        </div>
-      </div>
-    `;
+    // Clear messages
+    boomiMessages.innerHTML = '';
     
-    // Focus input
+    // Show typing dots
+    const typingIndicator = showTypingIndicator();
+    
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          session_id: "",
+          message: "hello" // Send initial hello silently to start the session
+        })
+      });
+      
+      typingIndicator.remove();
+      
+      if (!response.ok) {
+        throw new Error(`Server status ${response.status}`);
+      }
+      
+      const data = await response.json();
+      if (data.session_id) {
+        sessionId = data.session_id;
+        localStorage.setItem('boomi_session_id', sessionId);
+      }
+      
+      // Append the welcome response from Boomi
+      appendMessage(data.response || "Hello! How can I help you today?", 'agent');
+      
+    } catch (error) {
+      console.error('Failed to start new session:', error);
+      typingIndicator.remove();
+      appendMessage("Hello! I'm your BaptistCare assistant powered by Boomi. How can I help you today?", 'agent');
+    }
+    
+    // Reset input textbox
     boomiInput.value = "";
     boomiInput.style.height = 'auto';
     boomiInput.focus();
