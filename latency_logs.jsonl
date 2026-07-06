@@ -1,1 +1,2 @@
 {"request_id":"req_0fe53140-da3","event":"chat_request","cache_hit":false,"session_get_ms":0,"agent_ms":19561,"save_enqueue_ms":2,"history_len":0,"prompt_len":44,"status":200,"error":"","total_ms":19564,"session_id":"01KWVFKTH6F78H81MFBE9H5QE1"}
+{"request_id":"req_c66e0f72-4de","event":"chat_request","cache_hit":true,"session_get_ms":0,"agent_ms":16518,"save_enqueue_ms":4,"history_len":501,"prompt_len":546,"status":200,"error":"","total_ms":16522,"session_id":"01KWVG4JE0K9B2PMJ8XDT0CK2B"}

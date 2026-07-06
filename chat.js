@@ -179,9 +179,18 @@
   function appendMessage(text, sender) {
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('message', sender);
-    msgDiv.innerHTML = `<div class="msg-bubble">${escapeHTML(text)}</div>`;
+    msgDiv.innerHTML = `<div class="msg-bubble">${formatMessage(text)}</div>`;
     boomiMessages.appendChild(msgDiv);
     boomiMessages.scrollTop = boomiMessages.scrollHeight;
+  }
+
+  function formatMessage(text) {
+    let escaped = escapeHTML(text);
+    // Parse **bold** markdown tags
+    escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // Convert newlines to HTML line breaks
+    escaped = escaped.replace(/\n/g, '<br>');
+    return escaped;
   }
 
   function showTypingIndicator() {
