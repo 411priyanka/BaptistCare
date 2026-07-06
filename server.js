@@ -9,11 +9,11 @@ const schedule = require('node-schedule');
 
 const app = express();
 
-// Configuration constants (with environment variable fallback for production)
-const BOOMI_USERNAME = process.env.BOOMI_USERNAME || "dbiz-MV90UC.0YFZAO";
-const BOOMI_PASSWORD = process.env.BOOMI_PASSWORD || "6710d7c5-1f74-49c3-a026-9bb4fc88d2e6";
-const BOOMI_ENDPOINT = process.env.BOOMI_ENDPOINT || "https://c01-aus.integrate-test.boomi.com/ws/rest/southerncross/chatbot";
-const BOOMI_SESSION_ENDPOINT = process.env.BOOMI_SESSION_ENDPOINT || "https://c01-aus.integrate-test.boomi.com/ws/rest/southerncross/session";
+// Configuration constants
+const BOOMI_USERNAME = "dbiz-MV90UC.0YFZAO";
+const BOOMI_PASSWORD = "6710d7c5-1f74-49c3-a026-9bb4fc88d2e6";
+const BOOMI_ENDPOINT = "https://c01-aus.integrate-test.boomi.com/ws/rest/southerncross/chatbot";
+const BOOMI_SESSION_ENDPOINT = "https://c01-aus.integrate-test.boomi.com/ws/rest/southerncross/session";
 const SESSION_GET_TIMEOUT = 60000; // 60 seconds
 const AGENT_TIMEOUT = 120000; // 120 seconds
 const SESSION_SAVE_TIMEOUT = 60000; // 60 seconds
@@ -388,7 +388,7 @@ app.get('/test-boomi', async (req, res) => {
             message: 'User: Ping. Reply with test confirmation.'
         }, {
             headers: HEADERS,
-            timeout: 15000 // 15s timeout
+            timeout: 120000 // 120s timeout to allow slow cold-starts
         });
         
         res.json({
