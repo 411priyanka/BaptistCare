@@ -1,0 +1,17 @@
+services:
+  # Static Site Deployment (Free, recommended for frontend-only sites)
+  - type: web
+    name: baptistcare-boomi-chat-static
+    runtime: static
+    buildCommand: ""
+    publishPath: "."
+
+  # Alternative: Web Service Deployment (If backend features are added later)
+  - type: web
+    name: baptistcare-boomi-chat-service
+    runtime: node
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: PORT
+        value: 3000
