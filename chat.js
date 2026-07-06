@@ -124,6 +124,20 @@
     setBoomiBubbleActive(false);
   });
 
+  function setChatInputDisabled(disabled, placeholderText = "Type your message...") {
+    boomiInput.disabled = disabled;
+    boomiSendBtn.disabled = disabled;
+    if (disabled) {
+      boomiInput.placeholder = placeholderText;
+      boomiSendBtn.style.opacity = "0.5";
+      boomiSendBtn.style.cursor = "not-allowed";
+    } else {
+      boomiInput.placeholder = "Type your message...";
+      boomiSendBtn.style.opacity = "1";
+      boomiSendBtn.style.cursor = "pointer";
+    }
+  }
+
   resetBoomi.addEventListener('click', async () => {
     // Clear session details
     sessionId = "";
@@ -131,6 +145,9 @@
     
     // Clear messages
     boomiMessages.innerHTML = '';
+    
+    // Disable inputs
+    setChatInputDisabled(true, "Starting new conversation...");
     
     // Show typing dots
     const typingIndicator = showTypingIndicator();
@@ -168,6 +185,9 @@
       appendMessage("Hello! I'm your BaptistCare assistant powered by Boomi. How can I help you today?", 'agent');
     }
     
+    // Enable inputs
+    setChatInputDisabled(false);
+    
     // Reset input textbox
     boomiInput.value = "";
     boomiInput.style.height = 'auto';
@@ -197,6 +217,9 @@
     appendMessage(text, 'user');
     boomiInput.value = '';
     boomiInput.style.height = 'auto';
+
+    // Disable inputs
+    setChatInputDisabled(true, "Thinking...");
 
     // Show typing dots
     const typingIndicator = showTypingIndicator();
@@ -236,6 +259,10 @@
       sessionId = "";
       localStorage.removeItem('boomi_session_id');
     }
+
+    // Enable inputs
+    setChatInputDisabled(false);
+    boomiInput.focus();
   }
 
   function appendMessage(text, sender) {
